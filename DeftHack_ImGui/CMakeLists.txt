@@ -1,60 +1,71 @@
-cmake_minimum_required(VERSION 3.15)
-project(DeftHack_ImGui)
+cmake_minimum_required(VERSION 3.10)
+project(DeftHack_ImGui LANGUAGES CXX C)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# ImGui
-include_directories(imgui)
-include_directories(imgui/backends)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-
-# Source files - только основные файлы ImGui (без примеров)
-file(GLOB IMGUI_CORE_SOURCES 
-    "imgui/imgui.cpp"
-    "imgui/imgui_demo.cpp"
-    "imgui/imgui_draw.cpp"
-    "imgui/imgui_tables.cpp"
-    "imgui/imgui_widgets.cpp"
+# MinHook исходники
+set(MINHOOK_SRC
+    kiero-1.2.12/minhook/src/buffer.c
+    kiero-1.2.12/minhook/src/hook.c
+    kiero-1.2.12/minhook/src/trampoline.c
 )
 
-file(GLOB IMGUI_BACKEND_SOURCES
-    "imgui/backends/imgui_impl_dx11.cpp"
-    "imgui/backends/imgui_impl_win32.cpp"
+# Проверяем наличие MinHook
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/kiero-1.2.12/minhook/src/hook.c")
+    set(MINHOOK_AVAILABLE TRUE)
+    message(STATUS "MinHook найден")
+else()
+    set(MINHOOK_AVAILABLE FALSE)
+    message(WARNING "MinHook не найден! Запустите SETUP_MINHOOK.bat")
+endif()
+
+# Kiero исходники
+set(KIERO_SRC
+    kiero-1.2.12/kiero.cpp
 )
 
-file(GLOB SOURCES
-    "*.cpp"
+# ImGui исходники
+set(IMGUI_SRC
+    imgui/imgui.cpp
+    imgui/imgui_draw.cpp
+    imgui/imgui_tables.cpp
+    imgui/imgui_widgets.cpp
+    imgui/backends/imgui_impl_dx11.cpp
+    imgui/backends/imgui_impl_win32.cpp
 )
 
-# Header files (только для справки, не компилируются отдельно)
-file(GLOB HEADERS
-    "*.hpp"
-)
+# Основная библиотека
+if(MINHOOK_AVAILABLE)
+    add_library(DeftHack_ImGui SHARED
+        main.cpp
+        ${IMGUI_SRC}
+        ${KIERO_SRC}
+        ${MINHOOK_SRC}
+    )
+else()
+    add_library(DeftHack_ImGui SHARED
+        main.cpp
+        ${IMGUI_SRC}
+        ${KIERO_SRC}
+    )
+endif()
 
-add_library(DeftHack_ImGui SHARED
-    ${SOURCES}
-    ${IMGUI_CORE_SOURCES}
-    ${IMGUI_BACKEND_SOURCES}
-)
-
-# Libraries
-target_link_libraries(DeftHack_ImGui
-    d3d11
-    dxgi
-    user32
-    gdi32
-)
-
-# MinHook (опционально, раскомментируйте если MinHook доступен)
-# find_library(MINHOOK_LIB minhook PATHS ${CMAKE_CURRENT_SOURCE_DIR}/libs)
-# if(MINHOOK_LIB)
-#     target_link_libraries(DeftHack_ImGui ${MINHOOK_LIB})
-#     target_compile_definitions(DeftHack_ImGui PRIVATE USE_MINHOOK)
-# endif()
-
-# Оптимизации для Release
+# маскировка
 set_target_properties(DeftHack_ImGui PROPERTIES
-    CXX_STANDARD 17
-    CXX_STANDARD_REQUIRED ON
+    PREFIX ""
+    OUTPUT_NAME "version"
+    SUFFIX ".dll"
 )
+
+# пути к заголовкам
+target_include_directories(DeftHack_ImGui PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui
+    ${CMAKE_CURRENT_SOURCE_DIR}/imgui/backends
+    ${CMAKE_CURRENT_SOURCE_DIR}/kiero-1.2.12
+    ${CMAKE_CURRENT_SOURCE_DIR}/kiero-1.2.12/minhook/include
+)
+
+# линкуем
+target_link_libraries(DeftHack_ImGui PRIVATE d3d11 dxgi user32 gdi32)
