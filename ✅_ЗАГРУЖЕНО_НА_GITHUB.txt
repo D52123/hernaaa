@@ -1,0 +1,109 @@
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║           ✅ УСПЕШНО ЗАГРУЖЕНО НА GITHUB! ✅                 ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+
+
+🌐 РЕПОЗИТОРИЙ:
+   https://github.com/D52123/hernaaa
+
+
+📊 СТАТИСТИКА ЗАГРУЗКИ:
+   - Загружено объектов: 631
+   - Размер данных: 5.43 MB
+   - Изменений (delta): 153
+   - Ветка: master
+
+
+✨ ЧТО ЗАГРУЖЕНО:
+
+   📝 Обновленные файлы:
+   ✅ DeftHack_ImGui/kiero-1.2.12/kiero.h (D3D11=1, MinHook=1)
+   ✅ DeftHack_ImGui/main.cpp (интеграция Kiero + DeftHackGUI)
+   ✅ DeftHack_ImGui/CMakeLists.txt (поддержка MinHook)
+   ✅ DeftHack_ImGui/README.md
+   ✅ README.md (главный)
+   ✅ ~40 файлов ImGui backends
+
+   📦 Новые файлы:
+   ✅ DeftHack_ImGui/SETUP_MINHOOK.bat
+   ✅ DeftHack_ImGui/COMPILE_WITH_KIERO.bat
+   ✅ DeftHack_ImGui/ИНСТРУКЦИЯ_KIERO.md
+   ✅ DeftHack_ImGui/renderer_kiero.hpp
+   ✅ DeftHack_ImGui/kiero-1.2.12/ (полная библиотека)
+   ✅ DeftHack_ImGui/kiero-1.2.12/minhook/ (исходники)
+   ✅ CHANGELOG_KIERO.md
+   ✅ GIT_PUSH_UPDATE.bat
+   ✅ БЫСТРЫЙ_СТАРТ_KIERO.md
+   ✅ ⚡_ОБНОВЛЕНИЕ_KIERO.txt
+   ✅ ГОТОВО_ОБНОВЛЕНИЕ_KIERO.txt
+
+
+🎉 ОСНОВНЫЕ УЛУЧШЕНИЯ:
+
+   ✅ Kiero Hook System
+      - Стабильный хук DX11
+      - Автоматическое определение SwapChain
+      - Поддержка DX9/10/11/12
+
+   ✅ MinHook Integration
+      - Надежный хук функций
+      - Меньше вероятность детекта
+      - Улучшенная стабильность
+
+   ✅ Улучшенная структура
+      - Обновленный CMakeLists.txt
+      - Автоматические скрипты установки
+      - Подробная документация
+
+
+📋 ДЛЯ ПОЛЬЗОВАТЕЛЕЙ:
+
+   1. Клонируйте репозиторий:
+      git clone https://github.com/D52123/hernaaa.git
+
+   2. Установите MinHook:
+      cd hernaaa/DeftHack_ImGui
+      SETUP_MINHOOK.bat
+
+   3. Скомпилируйте:
+      COMPILE_WITH_KIERO.bat
+
+   4. Инжектируйте version.dll в игру
+
+
+📚 ДОКУМЕНТАЦИЯ:
+
+   - README.md - главная инструкция
+   - DeftHack_ImGui/ИНСТРУКЦИЯ_KIERO.md - подробная инструкция
+   - CHANGELOG_KIERO.md - список изменений
+   - БЫСТРЫЙ_СТАРТ_KIERO.md - быстрый старт
+
+
+🔒 КОММИТ:
+
+   Сообщение: "🎉 Update: Kiero + MinHook integration"
+   Hash: b97d1e7
+   Тип: forced update (перезапись истории)
+
+
+⚠️ ВАЖНО:
+
+   - Все файлы загружены успешно
+   - История коммитов перезаписана (force push)
+   - Репозиторий готов к использованию
+   - MinHook нужно скачать отдельно (SETUP_MINHOOK.bat)
+
+
+╔══════════════════════════════════════════════════════════════╗
+║                                                              ║
+║   Проверьте репозиторий: https://github.com/D52123/hernaaa  ║
+║                                                              ║
+╚══════════════════════════════════════════════════════════════╝
+
+
+Дата загрузки: 22 января 2026
+Версия: 2.0 (Kiero + MinHook)
+
+Готово! 🎮

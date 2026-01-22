@@ -8,46 +8,103 @@ namespace DeftHackGUI {
     inline int tab = 0;
     inline float animation = 0.0f;
 
-    // Переменные для читов
-    inline bool aimbot = false;
-    inline float fov = 90.f;
-    inline float smoothness = 5.0f;
-    inline bool esp = false;
-    inline bool esp_box = true;
-    inline bool esp_skeleton = false;
-    inline bool esp_name = true;
-    inline bool esp_distance = true;
-    inline bool chams = false;
-    inline int cham_type = 0;
-    inline bool bhop = false;
-    inline bool playerFlight = false;
-    inline float flightSpeed = 2.0f;
-    inline bool nightVision = false;
-    inline bool godMode = false;
-    inline bool noClip = false;
-    inline float speedHack = 1.0f;
-    inline ImVec4 esp_color = ImVec4(0.2f, 0.6f, 1.0f, 1.0f);
-    inline ImVec4 cham_color = ImVec4(1.0f, 0.3f, 0.5f, 1.0f);
+    // ============ AIMBOT OPTIONS ============
+    inline bool aimbot_enabled = false;
+    inline bool aimbot_smooth = false;
+    inline bool aimbot_onkey = false;
+    inline bool aimbot_usefov = true;
+    inline bool aimbot_noaimbotdrop = false;
+    inline float aimbot_speed = 5.0f;
+    inline float aimbot_distance = 300.0f;
+    inline float aimbot_fov = 15.0f;
+    
+    // ============ WEAPON OPTIONS ============
+    inline bool weapon_norecoil = false;
+    inline bool weapon_nospread = false;
+    inline bool weapon_nosway = false;
+    inline bool weapon_nodrop = false;
+    inline bool weapon_autoreload = false;
+    inline bool weapon_tracers = false;
+    inline bool weapon_zoom = false;
+    inline float weapon_zoomvalue = 16.0f;
+    inline bool weapon_customcrosshair = false;
+    
+    // ============ TRIGGERBOT ============
+    inline bool triggerbot_enabled = false;
+    
+    // ============ ESP OPTIONS ============
+    inline bool esp_enabled = true;
+    inline bool esp_chams = false;
+    inline bool esp_chamsflat = false;
+    inline bool esp_showvanish = false;
+    inline bool esp_showtooltip = false;
+    inline bool esp_showcoords = false;
+    inline bool esp_showplayerweapon = false;
+    inline bool esp_showplayervehicle = false;
+    inline bool esp_filteritems = false;
+    
+    // ============ RADAR OPTIONS ============
+    inline bool radar_enabled = false;
+    inline bool radar_trackplayer = false;
+    inline bool radar_showplayers = false;
+    inline bool radar_showvehicles = false;
+    inline float radar_size = 300.0f;
+    
+    // ============ INTERACTION OPTIONS ============
+    inline bool interact_throughwalls = false;
+    inline bool interact_nohitstructures = false;
+    inline bool interact_nohitbarricades = false;
+    inline bool interact_nohititems = false;
+    inline bool interact_nohitvehicles = false;
+    inline bool interact_nohitresources = false;
+    inline bool interact_nohitenvironment = false;
+    
+    // ============ ITEM OPTIONS ============
+    inline bool item_autopickup = false;
+    inline bool item_autoforage = false;
+    inline int item_pickupdelay = 1000;
+    
+    // ============ MISC OPTIONS ============
+    inline bool misc_punchsilentaim = false;
+    inline bool misc_punchaura = false;
+    inline bool misc_noflash = false;
+    inline bool misc_nosnow = false;
+    inline bool misc_norain = false;
+    inline bool misc_noflinch = false;
+    inline bool misc_nograyscale = false;
+    inline bool misc_slowfall = false;
+    inline bool misc_airstick = false;
+    inline bool misc_compass = false;
+    inline bool misc_gps = false;
+    inline bool misc_bones = false;
+    inline bool misc_showplayersonmap = false;
+    inline bool misc_nightvision = false;
+    inline bool misc_vehiclefly = false;
+    inline bool misc_vehiclemaxspeed = false;
+    inline float misc_speedmultiplier = 1.0f;
+    inline bool misc_extendmeleerange = false;
+    inline float misc_meleerange = 7.5f;
+    inline bool misc_playerflight = false;
+    inline float misc_flightspeed = 1.0f;
+    inline bool misc_freecam = false;
+    inline bool misc_spammer = false;
+    inline int misc_spammerdelay = 0;
+    
+    inline ImVec4 accent_color = ImVec4(0.25f, 0.60f, 1.00f, 1.0f);
 
-    // Вспомогательные функции для градиентов (оставлены для совместимости, но не используются в упрощенной версии)
-
-    // Современный стиль с градиентами и анимациями
     inline void StyleDeffHack() {
         ImGuiStyle* style = &ImGui::GetStyle();
         ImVec4* colors = style->Colors;
 
-        // Базовые настройки
         style->WindowPadding = ImVec2(15, 15);
         style->FramePadding = ImVec2(10, 6);
         style->CellPadding = ImVec2(8, 4);
         style->ItemSpacing = ImVec2(8, 6);
         style->ItemInnerSpacing = ImVec2(6, 4);
-        style->TouchExtraPadding = ImVec2(0, 0);
         style->IndentSpacing = 25;
         style->ScrollbarSize = 14;
         style->GrabMinSize = 12;
 
-        // Скругления
         style->WindowRounding = 12.0f;
         style->ChildRounding = 8.0f;
         style->FrameRounding = 6.0f;
@@ -56,295 +113,335 @@ namespace DeftHackGUI {
         style->GrabRounding = 4.0f;
         style->TabRounding = 6.0f;
 
-        // Границы
         style->WindowBorderSize = 0.0f;
         style->ChildBorderSize = 0.0f;
         style->PopupBorderSize = 0.0f;
         style->FrameBorderSize = 0.0f;
         style->TabBorderSize = 0.0f;
 
-        // Эффекты
         style->WindowTitleAlign = ImVec2(0.5f, 0.5f);
         style->ButtonTextAlign = ImVec2(0.5f, 0.5f);
-        style->SelectableTextAlign = ImVec2(0.0f, 0.0f);
 
-        // Современная темная палитра с акцентами
-        // Фон
         colors[ImGuiCol_WindowBg] = ImVec4(0.06f, 0.06f, 0.08f, 0.98f);
         colors[ImGuiCol_ChildBg] = ImVec4(0.05f, 0.05f, 0.07f, 1.00f);
         colors[ImGuiCol_PopupBg] = ImVec4(0.08f, 0.08f, 0.10f, 0.98f);
-
-        // Текст
         colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
         colors[ImGuiCol_TextDisabled] = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
-
-        // Рамы и элементы
         colors[ImGuiCol_FrameBg] = ImVec4(0.12f, 0.12f, 0.15f, 1.00f);
         colors[ImGuiCol_FrameBgHovered] = ImVec4(0.18f, 0.18f, 0.22f, 1.00f);
         colors[ImGuiCol_FrameBgActive] = ImVec4(0.22f, 0.22f, 0.28f, 1.00f);
-
-        // Заголовки окон
         colors[ImGuiCol_TitleBg] = ImVec4(0.08f, 0.08f, 0.10f, 1.00f);
         colors[ImGuiCol_TitleBgActive] = ImVec4(0.10f, 0.10f, 0.12f, 1.00f);
         colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.06f, 0.06f, 0.08f, 1.00f);
-
-        // Кнопки с градиентом
         colors[ImGuiCol_Button] = ImVec4(0.25f, 0.50f, 0.95f, 1.00f);
         colors[ImGuiCol_ButtonHovered] = ImVec4(0.35f, 0.60f, 1.00f, 1.00f);
         colors[ImGuiCol_ButtonActive] = ImVec4(0.15f, 0.40f, 0.85f, 1.00f);
-
-        // Заголовки
         colors[ImGuiCol_Header] = ImVec4(0.25f, 0.50f, 0.95f, 0.40f);
         colors[ImGuiCol_HeaderHovered] = ImVec4(0.35f, 0.60f, 1.00f, 0.60f);
         colors[ImGuiCol_HeaderActive] = ImVec4(0.25f, 0.50f, 0.95f, 1.00f);
-
-        // Чекбоксы и слайдеры
         colors[ImGuiCol_CheckMark] = ImVec4(0.25f, 0.60f, 1.00f, 1.00f);
         colors[ImGuiCol_SliderGrab] = ImVec4(0.25f, 0.60f, 1.00f, 1.00f);
         colors[ImGuiCol_SliderGrabActive] = ImVec4(0.35f, 0.70f, 1.00f, 1.00f);
-
-        // Вкладки
         colors[ImGuiCol_Tab] = ImVec4(0.10f, 0.10f, 0.12f, 1.00f);
         colors[ImGuiCol_TabHovered] = ImVec4(0.25f, 0.50f, 0.95f, 0.80f);
         colors[ImGuiCol_TabActive] = ImVec4(0.25f, 0.50f, 0.95f, 1.00f);
         colors[ImGuiCol_TabUnfocused] = ImVec4(0.08f, 0.08f, 0.10f, 1.00f);
         colors[ImGuiCol_TabUnfocusedActive] = ImVec4(0.12f, 0.12f, 0.15f, 1.00f);
-
-        // Скроллбары
         colors[ImGuiCol_ScrollbarBg] = ImVec4(0.05f, 0.05f, 0.07f, 1.00f);
         colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.25f, 0.25f, 0.35f, 1.00f);
         colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.35f, 0.35f, 0.45f, 1.00f);
         colors[ImGuiCol_ScrollbarGrabActive] = ImVec4(0.45f, 0.45f, 0.55f, 1.00f);
-
-        // Разделители
         colors[ImGuiCol_Separator] = ImVec4(0.20f, 0.20f, 0.25f, 1.00f);
         colors[ImGuiCol_SeparatorHovered] = ImVec4(0.30f, 0.30f, 0.35f, 1.00f);
         colors[ImGuiCol_SeparatorActive] = ImVec4(0.40f, 0.40f, 0.45f, 1.00f);
-
-        // Ресайз
         colors[ImGuiCol_ResizeGrip] = ImVec4(0.25f, 0.50f, 0.95f, 0.20f);
         colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.35f, 0.60f, 1.00f, 0.60f);
         colors[ImGuiCol_ResizeGripActive] = ImVec4(0.45f, 0.70f, 1.00f, 1.00f);
-
-        // Прочее
         colors[ImGuiCol_Border] = ImVec4(0.20f, 0.20f, 0.25f, 1.00f);
         colors[ImGuiCol_MenuBarBg] = ImVec4(0.08f, 0.08f, 0.10f, 1.00f);
-    }
-
-    // Красивый анимированный переключатель (упрощенная версия с публичным API)
-    inline bool ModernSwitch(const char* label, bool* v, const ImVec4& activeColor = ImVec4(0.25f, 0.60f, 1.00f, 1.00f)) {
-        // Используем стандартный Checkbox с кастомным стилем
-        ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(0.12f, 0.12f, 0.15f, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, ImVec4(0.18f, 0.18f, 0.22f, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_FrameBgActive, ImVec4(0.22f, 0.22f, 0.28f, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_CheckMark, activeColor);
-        
-        bool result = ImGui::Checkbox(label, v);
-        
-        ImGui::PopStyleColor(4);
-        return result;
-    }
-
-    // Современный слайдер (используем стандартный ImGui слайдер, но с улучшенным стилем)
-    inline bool ModernSliderFloat(const char* label, float* v, float v_min, float v_max, const char* format = "%.1f", float power = 1.0f) {
-        // Используем стандартный слайдер ImGui с улучшенными цветами
-        ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(0.12f, 0.12f, 0.15f, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_FrameBgHovered, ImVec4(0.18f, 0.18f, 0.22f, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_FrameBgActive, ImVec4(0.22f, 0.22f, 0.28f, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_SliderGrab, ImVec4(0.25f, 0.60f, 1.00f, 1.0f));
-        ImGui::PushStyleColor(ImGuiCol_SliderGrabActive, ImVec4(0.35f, 0.70f, 1.00f, 1.0f));
-        
-        bool result = ImGui::SliderFloat(label, v, v_min, v_max, format, power);
-        
-        ImGui::PopStyleColor(5);
-        return result;
-    }
-
-    // Красивая кнопка с градиентом (упрощенная версия с публичным API)
-    inline bool ModernButton(const char* label, const ImVec2& size_arg = ImVec2(0, 0), const ImVec4& color = ImVec4(0.25f, 0.50f, 0.95f, 1.0f)) {
-        // Используем стандартную кнопку с кастомными цветами
-        ImGui::PushStyleColor(ImGuiCol_Button, color);
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(color.x * 1.2f, color.y * 1.2f, color.z * 1.2f, color.w));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImVec4(color.x * 0.7f, color.y * 0.7f, color.z * 0.7f, color.w));
-        
-        bool result = ImGui::Button(label, size_arg);
-        
-        ImGui::PopStyleColor(3);
-        return result;
     }
 
     inline void Render() {
         if (!open) return;
 
-        animation += ImGui::GetIO().DeltaTime * 2.0f;
-        if (animation > 6.28f) animation = 0.0f; // Reset after 2π
-
-        // Размер и позиция окна
-        ImGui::SetNextWindowSize(ImVec2(680, 520), ImGuiCond_Once);
+        ImGui::SetNextWindowSize(ImVec2(750, 580), ImGuiCond_Once);
         ImGui::SetNextWindowPos(ImVec2(100, 100), ImGuiCond_Once);
         
-        // Заголовок окна с градиентом
-        if (ImGui::Begin("DeftHack Premium", &open, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize)) {
-            ImDrawList* draw_list = ImGui::GetWindowDrawList();
-            ImVec2 window_pos = ImGui::GetWindowPos();
-            ImVec2 window_size = ImGui::GetWindowSize();
+        if (ImGui::Begin("DeftHack Premium | Unturned", &open, ImGuiWindowFlags_NoCollapse)) {
             
-            // Градиентный фон заголовка
-            ImU32 col1 = ImGui::ColorConvertFloat4ToU32(ImVec4(0.15f, 0.30f, 0.60f, 1.0f));
-            ImU32 col2 = ImGui::ColorConvertFloat4ToU32(ImVec4(0.25f, 0.50f, 0.95f, 1.0f));
-            draw_list->AddRectFilledMultiColor(
-                window_pos,
-                ImVec2(window_pos.x + window_size.x, window_pos.y + 40),
-                col1, col2, col2, col1
-            );
-            
-            ImGui::Spacing();
-            ImGui::Spacing();
-            
-            // Вкладки с улучшенным стилем
-            const char* tabs[] = { "LEGIT", "VISUALS", "MISC", "SETTINGS" };
-            
-            if (ImGui::BeginTabBar("MainTabs", ImGuiTabBarFlags_None)) {
-                // TAB: LEGIT
-                if (ImGui::BeginTabItem("LEGIT")) {
+            if (ImGui::BeginTabBar("MainTabs")) {
+                
+                // ========== AIMBOT TAB ==========
+                if (ImGui::BeginTabItem("AIMBOT")) {
                     ImGui::Spacing();
-                    
-                    ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[0]);
-                    ImGui::TextColored(ImVec4(0.5f, 0.8f, 1.0f, 1.0f), "AIM ASSIST");
-                    ImGui::PopFont();
+                    ImGui::TextColored(ImVec4(0.5f, 0.8f, 1.0f, 1.0f), "AIMBOT SETTINGS");
                     ImGui::Separator();
                     ImGui::Spacing();
                     
-                    ModernSwitch("Enable Aimbot", &aimbot, ImVec4(0.25f, 0.70f, 1.00f, 1.0f));
-                    if (aimbot) {
-                        ImGui::Indent(20);
-                        ImGui::Spacing();
-                        ModernSliderFloat("FOV", &fov, 0.0f, 360.0f, "%.1f°");
-                        ImGui::Spacing();
-                        ModernSliderFloat("Smoothness", &smoothness, 1.0f, 20.0f, "%.1f");
-                        ImGui::Unindent(20);
-                    }
+                    ImGui::Checkbox("Enable Aimbot", &aimbot_enabled);
+                    ImGui::Checkbox("Smooth Aim", &aimbot_smooth);
+                    ImGui::Checkbox("Aim On Key", &aimbot_onkey);
+                    ImGui::Checkbox("Use FOV", &aimbot_usefov);
+                    ImGui::Checkbox("No Aimbot Drop", &aimbot_noaimbotdrop);
                     
                     ImGui::Spacing();
-                    ImGui::Spacing();
+                    ImGui::SliderFloat("Aim Speed", &aimbot_speed, 1.0f, 20.0f, "%.1f");
+                    ImGui::SliderFloat("Max Distance", &aimbot_distance, 50.0f, 500.0f, "%.0f m");
+                    ImGui::SliderFloat("FOV", &aimbot_fov, 1.0f, 180.0f, "%.1f°");
                     
-                    ImGui::EndTabItem();
-                }
-
-                // TAB: VISUALS
-                if (ImGui::BeginTabItem("VISUALS")) {
                     ImGui::Spacing();
-                    
-                    ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[0]);
-                    ImGui::TextColored(ImVec4(0.8f, 0.5f, 1.0f, 1.0f), "ESP & CHAMS");
-                    ImGui::PopFont();
                     ImGui::Separator();
                     ImGui::Spacing();
                     
-                    ModernSwitch("ESP", &esp, ImVec4(0.3f, 0.8f, 0.5f, 1.0f));
-                    if (esp) {
-                        ImGui::Indent(20);
-                        ImGui::Spacing();
-                        ModernSwitch("Box ESP", &esp_box);
-                        ModernSwitch("Skeleton ESP", &esp_skeleton);
-                        ModernSwitch("Player Names", &esp_name);
-                        ModernSwitch("Distance", &esp_distance);
-                        ImGui::Spacing();
-                        ImGui::ColorEdit4("ESP Color", (float*)&esp_color, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
-                        ImGui::SameLine();
-                        ImGui::Text("ESP Color");
-                        ImGui::Unindent(20);
-                    }
-                    
+                    ImGui::TextColored(ImVec4(0.8f, 0.5f, 1.0f, 1.0f), "TRIGGERBOT");
+                    ImGui::Separator();
                     ImGui::Spacing();
-                    ModernSwitch("Chams", &chams, ImVec4(1.0f, 0.3f, 0.5f, 1.0f));
-                    if (chams) {
-                        ImGui::Indent(20);
-                        ImGui::Spacing();
-                        const char* cham_types[] = { "Normal", "Flat", "Wireframe", "Glow" };
-                        ImGui::Combo("Type", &cham_type, cham_types, IM_ARRAYSIZE(cham_types));
-                        ImGui::ColorEdit4("Chams Color", (float*)&cham_color, ImGuiColorEditFlags_NoInputs | ImGuiColorEditFlags_NoLabel);
-                        ImGui::SameLine();
-                        ImGui::Text("Chams Color");
-                        ImGui::Unindent(20);
-                    }
+                    ImGui::Checkbox("Enable Triggerbot", &triggerbot_enabled);
                     
-                    ImGui::Spacing();
                     ImGui::EndTabItem();
                 }
-
-                // TAB: MISC
+                
+                // ========== WEAPON TAB ==========
+                if (ImGui::BeginTabItem("WEAPON")) {
+                    ImGui::Spacing();
+                    ImGui::TextColored(ImVec4(1.0f, 0.7f, 0.3f, 1.0f), "WEAPON MODIFICATIONS");
+                    ImGui::Separator();
+                    ImGui::Spacing();
+                    
+                    ImGui::Checkbox("No Recoil", &weapon_norecoil);
+                    ImGui::Checkbox("No Spread", &weapon_nospread);
+                    ImGui::Checkbox("No Sway", &weapon_nosway);
+                    ImGui::Checkbox("No Bullet Drop", &weapon_nodrop);
+                    ImGui::Checkbox("Auto Reload", &weapon_autoreload);
+                    ImGui::Checkbox("Bullet Tracers", &weapon_tracers);
+                    ImGui::Checkbox("Custom Crosshair", &weapon_customcrosshair);
+                    
+                    ImGui::Spacing();
+                    ImGui::Separator();
+                    ImGui::Spacing();
+                    
+                    ImGui::Checkbox("Zoom", &weapon_zoom);
+                    if (weapon_zoom) {
+                        ImGui::Indent(20);
+                        ImGui::SliderFloat("Zoom Value", &weapon_zoomvalue, 1.0f, 50.0f, "%.1fx");
+                        ImGui::Unindent(20);
+                    }
+                    
+                    ImGui::Spacing();
+                    ImGui::Checkbox("Extend Melee Range", &misc_extendmeleerange);
+                    if (misc_extendmeleerange) {
+                        ImGui::Indent(20);
+                        ImGui::SliderFloat("Melee Range", &misc_meleerange, 1.0f, 20.0f, "%.1f m");
+                        ImGui::Unindent(20);
+                    }
+                    
+                    ImGui::EndTabItem();
+                }
+                
+                // ========== ESP TAB ==========
+                if (ImGui::BeginTabItem("ESP")) {
+                    ImGui::Spacing();
+                    ImGui::TextColored(ImVec4(0.3f, 0.8f, 0.5f, 1.0f), "ESP & VISUALS");
+                    ImGui::Separator();
+                    ImGui::Spacing();
+                    
+                    ImGui::Checkbox("Enable ESP", &esp_enabled);
+                    ImGui::Checkbox("Chams", &esp_chams);
+                    if (esp_chams) {
+                        ImGui::Indent(20);
+                        ImGui::Checkbox("Flat Chams", &esp_chamsflat);
+                        ImGui::Unindent(20);
+                    }
+                    
+                    ImGui::Spacing();
+                    ImGui::Checkbox("Show Vanished Players", &esp_showvanish);
+                    ImGui::Checkbox("Show Tooltip Window", &esp_showtooltip);
+                    ImGui::Checkbox("Show Coordinates", &esp_showcoords);
+                    ImGui::Checkbox("Show Player Weapon", &esp_showplayerweapon);
+                    ImGui::Checkbox("Show Player Vehicle", &esp_showplayervehicle);
+                    ImGui::Checkbox("Filter Items", &esp_filteritems);
+                    
+                    ImGui::Spacing();
+                    ImGui::Separator();
+                    ImGui::Spacing();
+                    
+                    ImGui::TextColored(ImVec4(0.8f, 0.8f, 0.3f, 1.0f), "RADAR");
+                    ImGui::Separator();
+                    ImGui::Spacing();
+                    
+                    ImGui::Checkbox("Enable Radar", &radar_enabled);
+                    if (radar_enabled) {
+                        ImGui::Indent(20);
+                        ImGui::Checkbox("Track Player", &radar_trackplayer);
+                        ImGui::Checkbox("Show Players", &radar_showplayers);
+                        ImGui::Checkbox("Show Vehicles", &radar_showvehicles);
+                        ImGui::SliderFloat("Radar Size", &radar_size, 100.0f, 500.0f, "%.0f");
+                        ImGui::Unindent(20);
+                    }
+                    
+                    ImGui::EndTabItem();
+                }
+                
+                // ========== PLAYER TAB ==========
+                if (ImGui::BeginTabItem("PLAYER")) {
+                    ImGui::Spacing();
+                    ImGui::TextColored(ImVec4(0.5f, 1.0f, 0.8f, 1.0f), "PLAYER MODIFICATIONS");
+                    ImGui::Separator();
+                    ImGui::Spacing();
+                    
+                    ImGui::Checkbox("Player Flight", &misc_playerflight);
+                    if (misc_playerflight) {
+                        ImGui::Indent(20);
+                        ImGui::SliderFloat("Flight Speed", &misc_flightspeed, 0.1f, 10.0f, "%.1fx");
+                        ImGui::Unindent(20);
+                    }
+                    
+                    ImGui::Spacing();
+                    ImGui::Checkbox("Freecam", &misc_freecam);
+                    ImGui::Checkbox("Slow Fall", &misc_slowfall);
+                    ImGui::Checkbox("Air Stick", &misc_airstick);
+                    
+                    ImGui::Spacing();
+                    ImGui::Separator();
+                    ImGui::Spacing();
+                    
+                    ImGui::TextColored(ImVec4(1.0f, 0.5f, 0.5f, 1.0f), "COMBAT");
+                    ImGui::Separator();
+                    ImGui::Spacing();
+                    
+                    ImGui::Checkbox("Punch Silent Aim", &misc_punchsilentaim);
+                    ImGui::Checkbox("Punch Aura", &misc_punchaura);
+                    ImGui::Checkbox("No Flash", &misc_noflash);
+                    ImGui::Checkbox("No Flinch", &misc_noflinch);
+                    
+                    ImGui::EndTabItem();
+                }
+                
+                // ========== WORLD TAB ==========
+                if (ImGui::BeginTabItem("WORLD")) {
+                    ImGui::Spacing();
+                    ImGui::TextColored(ImVec4(0.8f, 1.0f, 0.5f, 1.0f), "WORLD MODIFICATIONS");
+                    ImGui::Separator();
+                    ImGui::Spacing();
+                    
+                    ImGui::Checkbox("Night Vision", &misc_nightvision);
+                    ImGui::Checkbox("No Snow", &misc_nosnow);
+                    ImGui::Checkbox("No Rain", &misc_norain);
+                    ImGui::Checkbox("No Grayscale", &misc_nograyscale);
+                    
+                    ImGui::Spacing();
+                    ImGui::Separator();
+                    ImGui::Spacing();
+                    
+                    ImGui::TextColored(ImVec4(0.5f, 0.8f, 1.0f, 1.0f), "INTERACTION");
+                    ImGui::Separator();
+                    ImGui::Spacing();
+                    
+                    ImGui::Checkbox("Interact Through Walls", &interact_throughwalls);
+                    ImGui::Checkbox("No Hit Structures", &interact_nohitstructures);
+                    ImGui::Checkbox("No Hit Barricades", &interact_nohitbarricades);
+                    ImGui::Checkbox("No Hit Items", &interact_nohititems);
+                    ImGui::Checkbox("No Hit Vehicles", &interact_nohitvehicles);
+                    ImGui::Checkbox("No Hit Resources", &interact_nohitresources);
+                    ImGui::Checkbox("No Hit Environment", &interact_nohitenvironment);
+                    
+                    ImGui::EndTabItem();
+                }
+                
+                // ========== ITEMS TAB ==========
+                if (ImGui::BeginTabItem("ITEMS")) {
+                    ImGui::Spacing();
+                    ImGui::TextColored(ImVec4(1.0f, 0.8f, 0.3f, 1.0f), "ITEM OPTIONS");
+                    ImGui::Separator();
+                    ImGui::Spacing();
+                    
+                    ImGui::Checkbox("Auto Item Pickup", &item_autopickup);
+                    ImGui::Checkbox("Auto Forage Pickup", &item_autoforage);
+                    
+                    ImGui::Spacing();
+                    ImGui::SliderInt("Pickup Delay (ms)", &item_pickupdelay, 0, 5000);
+                    
+                    ImGui::EndTabItem();
+                }
+                
+                // ========== VEHICLE TAB ==========
+                if (ImGui::BeginTabItem("VEHICLE")) {
+                    ImGui::Spacing();
+                    ImGui::TextColored(ImVec4(0.8f, 0.5f, 1.0f, 1.0f), "VEHICLE MODIFICATIONS");
+                    ImGui::Separator();
+                    ImGui::Spacing();
+                    
+                    ImGui::Checkbox("Vehicle Fly", &misc_vehiclefly);
+                    ImGui::Checkbox("Use Max Speed", &misc_vehiclemaxspeed);
+                    
+                    ImGui::Spacing();
+                    ImGui::SliderFloat("Speed Multiplier", &misc_speedmultiplier, 0.1f, 10.0f, "%.1fx");
+                    
+                    ImGui::EndTabItem();
+                }
+                
+                // ========== MISC TAB ==========
                 if (ImGui::BeginTabItem("MISC")) {
                     ImGui::Spacing();
-                    
-                    ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[0]);
-                    ImGui::TextColored(ImVec4(1.0f, 0.7f, 0.3f, 1.0f), "MISCELLANEOUS");
-                    ImGui::PopFont();
+                    ImGui::TextColored(ImVec4(1.0f, 0.7f, 0.5f, 1.0f), "MISCELLANEOUS");
                     ImGui::Separator();
                     ImGui::Spacing();
                     
-                    ModernSwitch("God Mode", &godMode, ImVec4(1.0f, 0.2f, 0.2f, 1.0f));
-                    ModernSwitch("No Clip", &noClip, ImVec4(0.8f, 0.2f, 0.8f, 1.0f));
-                    ModernSwitch("Player Flight", &playerFlight, ImVec4(0.5f, 0.8f, 1.0f, 1.0f));
+                    ImGui::Checkbox("Compass", &misc_compass);
+                    ImGui::Checkbox("GPS", &misc_gps);
+                    ImGui::Checkbox("Show Bones", &misc_bones);
+                    ImGui::Checkbox("Show Players On Map", &misc_showplayersonmap);
                     
-                    if (playerFlight) {
+                    ImGui::Spacing();
+                    ImGui::Separator();
+                    ImGui::Spacing();
+                    
+                    ImGui::Checkbox("Chat Spammer", &misc_spammer);
+                    if (misc_spammer) {
                         ImGui::Indent(20);
-                        ImGui::Spacing();
-                        ModernSliderFloat("Flight Speed", &flightSpeed, 0.1f, 10.0f, "%.1fx");
+                        ImGui::SliderInt("Spam Delay (ms)", &misc_spammerdelay, 0, 5000);
                         ImGui::Unindent(20);
                     }
                     
-                    ImGui::Spacing();
-                    ModernSwitch("Bunny Hop", &bhop, ImVec4(0.3f, 1.0f, 0.5f, 1.0f));
-                    ModernSwitch("Night Vision", &nightVision, ImVec4(1.0f, 1.0f, 0.3f, 1.0f));
-                    
-                    ImGui::Spacing();
-                    ModernSliderFloat("Speed Hack", &speedHack, 0.1f, 5.0f, "%.1fx");
-                    
-                    ImGui::Spacing();
-                    ImGui::Spacing();
-                    if (ModernButton("Heal Player", ImVec2(-1, 35), ImVec4(0.2f, 0.8f, 0.3f, 1.0f))) {
-                        // Вызов функции лечения из C# чита
-                    }
-                    
-                    ImGui::Spacing();
                     ImGui::EndTabItem();
                 }
-
-                // TAB: SETTINGS
-                if (ImGui::BeginTabItem("SETTINGS")) {
+                
+                // ========== INFO TAB ==========
+                if (ImGui::BeginTabItem("INFO")) {
                     ImGui::Spacing();
-                    
-                    ImGui::PushFont(ImGui::GetIO().Fonts->Fonts[0]);
-                    ImGui::TextColored(ImVec4(0.6f, 0.6f, 0.8f, 1.0f), "SETTINGS");
-                    ImGui::PopFont();
+                    ImGui::TextColored(ImVec4(0.6f, 0.6f, 0.8f, 1.0f), "INFORMATION");
                     ImGui::Separator();
                     ImGui::Spacing();
                     
-                    ImGui::Text("DeftHack Premium v2.0");
+                    ImGui::Text("DeftHack Premium for Unturned");
+                    ImGui::Text("Version: 2.0 ImGui Edition");
                     ImGui::Text("Build: Release x64");
                     ImGui::Spacing();
                     ImGui::Separator();
                     ImGui::Spacing();
                     
-                    ImGui::Text("Hotkeys:");
+                    ImGui::TextColored(ImVec4(0.8f, 0.8f, 0.3f, 1.0f), "Hotkeys:");
                     ImGui::BulletText("INSERT - Toggle Menu");
-                    ImGui::BulletText("END - Unload Hack");
+                    ImGui::BulletText("END - Panic Mode");
+                    ImGui::Spacing();
+                    ImGui::Separator();
                     ImGui::Spacing();
                     
-                    if (ModernButton("Unload Hack", ImVec2(-1, 40), ImVec4(0.8f, 0.2f, 0.2f, 1.0f))) {
+                    ImGui::TextColored(ImVec4(1.0f, 0.3f, 0.3f, 1.0f), "WARNING:");
+                    ImGui::TextWrapped("This is a game modification tool. Use at your own risk. The developers are not responsible for any bans or consequences.");
+                    
+                    ImGui::Spacing();
+                    ImGui::Spacing();
+                    
+                    if (ImGui::Button("Close Menu", ImVec2(-1, 40))) {
                         open = false;
-                        // TODO: Отключить читы и выгрузить DLL
                     }
                     
-                    ImGui::Spacing();
                     ImGui::EndTabItem();
                 }
-
+                
                 ImGui::EndTabBar();
             }
-            
-            // Горячие клавиши обрабатываются в hkPresent через ImGui_ImplWin32_WndProcHandler
         }
         ImGui::End();
     }
