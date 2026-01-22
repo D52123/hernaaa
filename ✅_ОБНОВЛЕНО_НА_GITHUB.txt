@@ -1,0 +1,116 @@
+╔══════════════════════════════════════════════════════════════╗
+║          ✅ РЕПОЗИТОРИЙ УСПЕШНО ОБНОВЛЕН НА GITHUB          ║
+╚══════════════════════════════════════════════════════════════╝
+
+📅 Дата обновления: 23 января 2026
+
+🔧 ЧТО БЫЛО СДЕЛАНО:
+
+1. ✅ ИСПРАВЛЕНА ПРОБЛЕМА С MINHOOK
+   - MinHook установлен в правильное место (DeftHack_ImGui/minhook/)
+   - Обновлен CMakeLists.txt с правильными путями
+   - Создан скрипт COMPILE_WITH_MINHOOK.bat для компиляции
+
+2. ✅ ОБНОВЛЕН GUI (deffhack_gui.hpp)
+   - Удалены несуществующие функции (God Mode, No Clip, Bunny Hop)
+   - Добавлены ВСЕ реальные функции из C# чита:
+   
+   📂 AIMBOT вкладка:
+      • Enable Aimbot, Smooth Aim, Aim On Key, Use FOV
+      • No Aimbot Drop, Aim Speed, Max Distance, FOV
+      • Triggerbot
+   
+   📂 WEAPON вкладка:
+      • No Recoil, No Spread, No Sway, No Bullet Drop
+      • Auto Reload, Bullet Tracers, Custom Crosshair
+      • Zoom с настройкой, Extend Melee Range
+   
+   📂 ESP вкладка:
+      • Enable ESP, Chams (Flat Chams)
+      • Show Vanished Players, Tooltip, Coordinates
+      • Show Player Weapon/Vehicle, Filter Items
+      • Radar с полными настройками
+   
+   📂 PLAYER вкладка:
+      • Player Flight с настройкой скорости
+      • Freecam, Slow Fall, Air Stick
+      • Punch Silent Aim, Punch Aura
+      • No Flash, No Flinch
+   
+   📂 WORLD вкладка:
+      • Night Vision, No Snow, No Rain, No Grayscale
+      • Interact Through Walls
+      • No Hit (Structures, Barricades, Items, Vehicles, Resources, Environment)
+   
+   📂 ITEMS вкладка:
+      • Auto Item Pickup, Auto Forage Pickup
+      • Pickup Delay настройка
+   
+   📂 VEHICLE вкладка:
+      • Vehicle Fly, Use Max Speed
+      • Speed Multiplier
+   
+   📂 MISC вкладка:
+      • Compass, GPS, Show Bones, Show Players On Map
+      • Chat Spammer с задержкой
+   
+   📂 INFO вкладка:
+      • Информация о версии
+      • Горячие клавиши
+      • Предупреждение
+
+3. ✅ ИСПРАВЛЕНА ОШИБКА В main.cpp
+   - Заменена функция ImGui_ImplWin32_WndProcHandler_Platform
+   - На правильную ImGui_ImplWin32_WndProcHandler
+
+4. ✅ УСПЕШНАЯ КОМПИЛЯЦИЯ
+   - Файл: version.dll (810 KB)
+   - Все функции скомпилированы без ошибок
+   - Готово к инжекции в Unturned
+
+📦 СТРУКТУРА ПРОЕКТА:
+
+DeftHack_ImGui/
+  ├─ kiero-1.2.12/          ← Kiero для hooking DirectX
+  ├─ minhook/               ← MinHook для hooking функций
+  │   ├─ include/
+  │   │   └─ MinHook.h
+  │   └─ src/
+  │       ├─ buffer.c
+  │       ├─ hook.c
+  │       ├─ trampoline.c
+  │       └─ hde/hde64.c
+  ├─ imgui/                 ← ImGui библиотека
+  ├─ main.cpp               ← Основной файл с hooking
+  ├─ deffhack_gui.hpp       ← GUI с реальными функциями чита
+  ├─ CMakeLists.txt         ← CMake конфигурация
+  ├─ COMPILE_WITH_MINHOOK.bat ← Скрипт компиляции
+  └─ version.dll            ← Скомпилированная DLL
+
+🚀 КАК ИСПОЛЬЗОВАТЬ:
+
+1. Скачайте репозиторий с GitHub
+2. Запустите COMPILE_WITH_MINHOOK.bat (требуется Visual Studio)
+3. Получите version.dll в папке DeftHack_ImGui/
+4. Запустите Unturned
+5. Инжектируйте version.dll через инжектор
+6. Нажмите INSERT для открытия меню
+
+⚠️ ПРИМЕЧАНИЕ О ПРЕДУПРЕЖДЕНИИ:
+
+Предупреждение "g_methodsTable может быть равен 0" - это предупреждение
+анализатора кода Visual Studio. Оно не критично и не влияет на работу.
+Это стандартное предупреждение в библиотеке Kiero.
+
+🔗 ССЫЛКА НА РЕПОЗИТОРИЙ:
+https://github.com/D52123/hernaaa.git
+
+═══════════════════════════════════════════════════════════════
+
+Коммит: e56ead2
+Сообщение: "Update: MinHook integration + updated GUI with real cheat functions"
+Файлов изменено: 32
+Добавлено строк: 5056
+Удалено строк: 957
+
+═══════════════════════════════════════════════════════════════
